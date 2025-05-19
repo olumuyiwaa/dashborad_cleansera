@@ -72,29 +72,29 @@ class SideMenu extends StatelessWidget {
                   isActive: pageIndex == 4,
                 ),
                 DrawerListTile(
+                  title: "Chat",
+                  svgSrc: "assets/icons/chat.svg",
+                  press: () {
+                    onItemTapped(5);
+                    onTitleTapped("Chat");
+                  },
+                  isActive: pageIndex == 5,
+                ),
+                DrawerListTile(
                   title: "Administration",
                   svgSrc: "assets/icons/administration.svg",
                   press: () {
-                    onItemTapped(5);
+                    onItemTapped(6);
                     onTitleTapped("Administration");
                   },
-                  isActive: pageIndex == 5,
+                  isActive: pageIndex == 6,
                 ),
                 DrawerListTile(
                   title: "Help",
                   svgSrc: "assets/icons/help.svg",
                   press: () {
-                    onItemTapped(6);
-                    onTitleTapped("Help");
-                  },
-                  isActive: pageIndex == 6,
-                ),
-                DrawerListTile(
-                  title: "Chat",
-                  svgSrc: "assets/icons/chat.svg",
-                  press: () {
                     onItemTapped(7);
-                    onTitleTapped("Chat");
+                    onTitleTapped("Help");
                   },
                   isActive: pageIndex == 7,
                 ),

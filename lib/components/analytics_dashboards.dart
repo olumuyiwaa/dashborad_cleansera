@@ -9,9 +9,14 @@ class AnalyticsDashboard extends StatefulWidget {
 }
 
 class _AnalyticsDashboardState extends State<AnalyticsDashboard> {
-  String _selectedFilter = 'All';
-  String _selectedYear = '2024';
-
+  String _selectedYear = DateTime.now().year.toString();
+  List<String> years = [
+    DateTime.now().year.toString(),
+    (DateTime.now().year - 1).toString(),
+    (DateTime.now().year - 2).toString(),
+    (DateTime.now().year - 3).toString(),
+    (DateTime.now().year - 4).toString(),
+  ];
   // Data for the chart
   final List<double> _targetValues = [
     25000,
@@ -92,7 +97,6 @@ class _AnalyticsDashboardState extends State<AnalyticsDashboard> {
         Row(
           spacing: 8,
           children: [
-            _buildFilterButton('All'),
             _buildFilterButton('Completed'),
             _buildFilterButton('On-going'),
             _buildYearDropdown(),
@@ -103,46 +107,36 @@ class _AnalyticsDashboardState extends State<AnalyticsDashboard> {
   }
 
   Widget _buildFilterButton(String filter) {
-    bool isSelected = _selectedFilter == filter;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedFilter = filter;
-        });
-      },
-      child: Container(
-        constraints: BoxConstraints(minWidth: 56),
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        alignment: Alignment.center,
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-              width: isSelected ? 2 : 1,
-              color: isSelected ? Colors.blue : Colors.grey.shade300),
-        ),
-        child: Row(
-          spacing: 4,
-          children: [
-            filter == "All"
-                ? SizedBox.shrink()
-                : Container(
-                    height: 20,
-                    width: 20,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: filter == "Completed"
-                            ? Colors.blue
-                            : Colors.blue.withOpacity(.2)),
-                  ),
-            Text(
-              filter,
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            )
-          ],
-        ),
+    return Container(
+      constraints: BoxConstraints(minWidth: 56),
+      padding: EdgeInsets.symmetric(horizontal: 8),
+      alignment: Alignment.center,
+      height: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(width: 1, color: Colors.grey.shade300),
+      ),
+      child: Row(
+        spacing: 4,
+        children: [
+          filter == "All"
+              ? SizedBox.shrink()
+              : Container(
+                  height: 20,
+                  width: 20,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: filter == "Completed"
+                          ? Colors.blue
+                          : Colors.blue.withOpacity(.2)),
+                ),
+          Text(
+            filter,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -164,8 +158,7 @@ class _AnalyticsDashboardState extends State<AnalyticsDashboard> {
               });
             }
           },
-          items: <String>['2022', '2023', '2024', '2025']
-              .map<DropdownMenuItem<String>>((String value) {
+          items: years.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),

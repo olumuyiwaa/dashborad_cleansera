@@ -441,9 +441,9 @@ class _ActiveSessionState extends State<ActiveSession> {
         projects: allProjects,
       ),
       Reports(),
+      ChatApp(),
       Administration(),
       FAQSection(),
-      ChatApp(),
       UserDetails(
         user: user,
         projects: allProjects,
