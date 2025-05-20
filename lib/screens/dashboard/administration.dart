@@ -86,6 +86,27 @@ class _AdministrationState extends State<Administration> {
                   color: Colors.white, borderRadius: BorderRadius.circular(12)),
               padding: const EdgeInsets.all(16.0),
               child: Column(spacing: 32, children: [
+                if (!Responsive.isDesktop(context))
+                  Stack(
+                    children: [
+                      Container(
+                        height: 320,
+                        width: 320,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.blue.withOpacity(.2)),
+                      ),
+                      Positioned(
+                          bottom: 10,
+                          right: 10,
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.camera_alt,
+                                size: 32,
+                              )))
+                    ],
+                  ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   spacing: defaultPadding,
@@ -132,44 +153,28 @@ class _AdministrationState extends State<Administration> {
                   ],
                 ),
                 if (!Responsive.isDesktop(context))
-                  Column(
-                    spacing: 32,
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            height: 320,
-                            width: 320,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.blue.withOpacity(.2)),
-                          ),
-                          Positioned(
-                              bottom: 10,
-                              right: 10,
-                              child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.camera_alt,
-                                    size: 32,
-                                  )))
-                        ],
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: _buildSubmitButton(),
-                      )
-                    ],
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: _buildSubmitButton(),
                   )
               ])),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: defaultPadding,
-            children: [
-              Expanded(flex: 3, child: _buildLocationListSection()),
-              Expanded(flex: 3, child: _buildPracticeDetailsSection())
-            ],
-          ),
+          !Responsive.isMobile(context)
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: defaultPadding,
+                  children: [
+                    Expanded(flex: 3, child: _buildLocationListSection()),
+                    Expanded(flex: 3, child: _buildPracticeDetailsSection())
+                  ],
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: defaultPadding,
+                  children: [
+                    _buildLocationListSection(),
+                    _buildPracticeDetailsSection()
+                  ],
+                ),
         ],
       ),
     );

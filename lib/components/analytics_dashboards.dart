@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+import '../responsive.dart';
+
 class AnalyticsDashboard extends StatefulWidget {
   const AnalyticsDashboard({super.key});
 
@@ -50,7 +52,7 @@ class _AnalyticsDashboardState extends State<AnalyticsDashboard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(Responsive.isMobile(context) ? 8 : 16),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -98,7 +100,7 @@ class _AnalyticsDashboardState extends State<AnalyticsDashboard> {
           spacing: 8,
           children: [
             _buildFilterButton('Completed'),
-            _buildFilterButton('On-going'),
+            _buildFilterButton('All'),
             _buildYearDropdown(),
           ],
         ),
@@ -119,17 +121,15 @@ class _AnalyticsDashboardState extends State<AnalyticsDashboard> {
       child: Row(
         spacing: 4,
         children: [
-          filter == "All"
-              ? SizedBox.shrink()
-              : Container(
-                  height: 20,
-                  width: 20,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: filter == "Completed"
-                          ? Colors.blue
-                          : Colors.blue.withOpacity(.2)),
-                ),
+          Container(
+            height: 20,
+            width: 20,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: filter == "Completed"
+                    ? Colors.blue
+                    : Colors.blue.withOpacity(.2)),
+          ),
           Text(
             filter,
             style: TextStyle(

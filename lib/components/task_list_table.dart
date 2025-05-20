@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../models/project.dart';
 import '../models/user.dart';
+import '../responsive.dart';
 import 'task_details.dart';
 import 'task_details_form.dart';
 
@@ -143,24 +144,26 @@ class _ProjectListTableState extends State<ProjectListTable> {
                 ),
                 Row(
                   children: [
-                    ElevatedButton.icon(
-                      icon: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      label: const Text('Create Task'),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
+                    if (!Responsive.isMobile(context))
+                      ElevatedButton.icon(
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.white,
                         ),
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
+                        label: const Text('Create Task'),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white,
+                        ),
+                        onPressed: () {
+                          _showTaskFormModal(context);
+                        },
                       ),
-                      onPressed: () {
-                        _showTaskFormModal(context);
-                      },
-                    ),
-                    const SizedBox(width: 10),
+                    if (!Responsive.isMobile(context))
+                      const SizedBox(width: 10),
                     OutlinedButton.icon(
                       onPressed: () {
                         // Export to Excel functionality would go here

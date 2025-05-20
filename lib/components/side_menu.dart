@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants.dart';
+import '../responsive.dart';
 
 class SideMenu extends StatelessWidget {
   final int pageIndex;
@@ -53,15 +54,16 @@ class SideMenu extends StatelessWidget {
                   },
                   isActive: pageIndex == 2,
                 ),
-                DrawerListTile(
-                  title: "Calendar",
-                  svgSrc: "assets/icons/calendar.svg",
-                  press: () {
-                    onItemTapped(3);
-                    onTitleTapped("Calendar");
-                  },
-                  isActive: pageIndex == 3,
-                ),
+                if (!Responsive.isMobile(context))
+                  DrawerListTile(
+                    title: "Calendar",
+                    svgSrc: "assets/icons/calendar.svg",
+                    press: () {
+                      onItemTapped(3);
+                      onTitleTapped("Calendar");
+                    },
+                    isActive: pageIndex == 3,
+                  ),
                 DrawerListTile(
                   title: "Reports",
                   svgSrc: "assets/icons/reports.svg",
